@@ -4,12 +4,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 import static lombok.AccessLevel.PROTECTED;
 
 @Getter
+@Setter
 @MappedSuperclass
 @NoArgsConstructor(access = PROTECTED)
 public abstract class ReplicaMember extends BaseMember {
