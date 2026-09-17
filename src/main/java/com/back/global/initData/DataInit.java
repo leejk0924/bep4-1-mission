@@ -71,12 +71,23 @@ public class DataInit {
         Member user2Member = memberFacade.findByUsername("user2").get();
         Member user3Member = memberFacade.findByUsername("user3").get();
 
-        RsData<Post> post1 = postFacade.write(user1Member, "제목1", "내용1");
-        RsData<Post> post2 = postFacade.write(user1Member, "제목2", "내용2");
-        RsData<Post> post3 = postFacade.write(user1Member, "제목3", "내용3");
-        RsData<Post> post4 = postFacade.write(user2Member, "제목4", "내용4");
-        RsData<Post> post5 = postFacade.write(user2Member, "제목5", "내용5");
-        RsData<Post> post6 = postFacade.write(user3Member, "제목6", "내용6");
+        RsData<Post> post1RsData = postFacade.write(user1Member, "제목1", "내용1");
+        log.debug(post1RsData.msg());
+
+        RsData<Post> post2RsData = postFacade.write(user1Member, "제목2", "내용2");
+        log.debug(post2RsData.msg());
+
+        RsData<Post> post3RsData = postFacade.write(user1Member, "제목3", "내용3");
+        log.debug(post3RsData.msg());
+
+        RsData<Post> post4RsData = postFacade.write(user2Member, "제목4", "내용4");
+        log.debug(post4RsData.msg());
+
+        RsData<Post> post5RsData = postFacade.write(user2Member, "제목5", "내용5");
+        log.debug(post5RsData.msg());
+
+        RsData<Post> post6RsData = postFacade.write(user3Member, "제목6", "내용6");
+        log.debug(post6RsData.msg());
     }
 
     @Transactional
