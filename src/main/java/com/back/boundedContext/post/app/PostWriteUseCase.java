@@ -4,6 +4,7 @@ import com.back.boundedContext.Member.domain.Member;
 import com.back.boundedContext.post.domain.Post;
 import com.back.boundedContext.post.out.PostRepository;
 import com.back.global.eventPublisher.EventPublisher;
+import com.back.global.rsData.RsData;
 import com.back.shared.post.dto.PostDto;
 import com.back.shared.post.evnet.PostCreatedEvent;
 import lombok.RequiredArgsConstructor;
@@ -15,11 +16,11 @@ public class PostWriteUseCase {
     private final PostRepository postRepository;
     private final EventPublisher eventPublisher;
 
-    public Post write(Member author, String title, String content) {
+    public RsData<Post> write(Member author, String title, String content) {
         var post = postRepository.save(new Post(author, title, content));
 
         eventPublisher.publish(new PostCreatedEvent(new PostDto(post)));
 
-        return post;
+        return new RsData<>("201-1", "%d번 글이 생성되었습니다.".formatted(post.getId()), post);
     }
 }
