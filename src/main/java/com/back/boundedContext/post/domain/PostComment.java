@@ -5,14 +5,17 @@ import com.back.global.jpa.entity.BaseIdAndTime;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import static jakarta.persistence.FetchType.LAZY;
 
-@Entity
 @Getter
-@NoArgsConstructor
+@Entity
+@Table(name = "POST_POST_COMMENT")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PostComment extends BaseIdAndTime {
     @ManyToOne(fetch = LAZY)
     private Post post;

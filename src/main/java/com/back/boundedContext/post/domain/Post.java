@@ -15,8 +15,9 @@ import java.util.List;
 import static jakarta.persistence.CascadeType.PERSIST;
 import static jakarta.persistence.CascadeType.REMOVE;
 
-@Entity
 @Getter
+@Entity
+@Table(name = "POST_POST")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Post extends BaseIdAndTime {
     @ManyToOne(fetch = FetchType.LAZY)
