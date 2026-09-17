@@ -1,4 +1,4 @@
-package com.back.boundedContext.Member.entity;
+package com.back.boundedContext.Member.domain;
 
 import com.back.global.jpa.entity.BaseIdAndTime;
 import jakarta.persistence.Column;

@@ -1,6 +1,6 @@
-package com.back.boundedContext.post.entity;
+package com.back.boundedContext.post.domain;
 
-import com.back.boundedContext.Member.entity.Member;
+import com.back.boundedContext.Member.domain.Member;
 import com.back.global.jpa.entity.BaseIdAndTime;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
