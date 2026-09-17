@@ -1,8 +1,8 @@
-package com.back.boundedContext.Member.app;
+package com.back.boundedContext.member.app;
 
-import com.back.boundedContext.Member.domain.Member;
-import com.back.boundedContext.Member.domain.MemberPolicy;
-import com.back.boundedContext.Member.out.MemberRepository;
+import com.back.boundedContext.member.domain.Member;
+import com.back.boundedContext.member.domain.MemberPolicy;
+import com.back.boundedContext.member.out.MemberRepository;
 import com.back.global.rsData.RsData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

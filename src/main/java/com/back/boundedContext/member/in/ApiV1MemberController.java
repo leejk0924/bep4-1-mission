@@ -1,6 +1,6 @@
-package com.back.boundedContext.Member.in;
+package com.back.boundedContext.member.in;
 
-import com.back.boundedContext.Member.app.MemberFacade;
+import com.back.boundedContext.member.app.MemberFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,4 +1,4 @@
-package com.back.boundedContext.Member.domain;
+package com.back.boundedContext.member.domain;
 
 import org.springframework.stereotype.Service;
 

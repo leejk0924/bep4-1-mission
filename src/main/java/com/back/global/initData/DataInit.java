@@ -1,7 +1,7 @@
 package com.back.global.initData;
 
-import com.back.boundedContext.Member.app.MemberFacade;
-import com.back.boundedContext.Member.domain.Member;
+import com.back.boundedContext.member.app.MemberFacade;
+import com.back.boundedContext.member.domain.Member;
 import com.back.boundedContext.post.app.PostFacade;
 import com.back.boundedContext.post.domain.Post;
 import com.back.global.rsData.RsData;
