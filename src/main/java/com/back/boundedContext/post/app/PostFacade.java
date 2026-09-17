@@ -37,13 +37,15 @@ public class PostFacade {
 
     @Transactional
     public PostMember syncMember(MemberDto member) {
-        var _member = new PostMember(member.username(), "", member.nickname());
-
-        _member.setId(member.id());
-        _member.setCreateDate(member.createDate());
-        _member.setModifyDate(member.modifyDate());
+        var _member = new PostMember(
+                member.id(),
+                member.createDate(),
+                member.modifyDate(),
+                member.username(),
+                "",
+                member.nickname()
+        );
 
         return postMemberRepository.save(_member);
     }
-
 }
