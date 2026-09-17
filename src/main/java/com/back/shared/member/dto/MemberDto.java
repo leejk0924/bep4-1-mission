@@ -9,7 +9,8 @@ public record MemberDto(
         LocalDateTime createDate,
         LocalDateTime modifyDate,
         String username,
-        String nickname
+        String nickname,
+        int activityScore
 ) {
     public MemberDto(Member member) {
         this(
@@ -17,7 +18,8 @@ public record MemberDto(
                 member.getCreateDate(),
                 member.getModifyDate(),
                 member.getUsername(),
-                member.getNickname()
+                member.getNickname(),
+                member.getActivityScore()
         );
     }
 }
