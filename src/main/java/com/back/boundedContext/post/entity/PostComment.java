@@ -5,11 +5,13 @@ import com.back.global.jpa.entity.BaseIdAndTime;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
+@Getter
 @NoArgsConstructor
 public class PostComment extends BaseIdAndTime {
     @ManyToOne(fetch = LAZY)
