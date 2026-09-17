@@ -1,7 +1,5 @@
-package com.back.global.initData;
+package com.back.boundedContext.post.in;
 
-import com.back.boundedContext.member.app.MemberFacade;
-import com.back.boundedContext.member.domain.Member;
 import com.back.boundedContext.post.app.PostFacade;
 import com.back.boundedContext.post.domain.Post;
 import com.back.boundedContext.post.domain.PostMember;
@@ -12,27 +10,25 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.core.annotation.Order;
 
 @Configuration
 @Slf4j
-public class DataInit {
-    private final DataInit self;
-    private final MemberFacade memberFacade;
+public class PostDataInit {
+    private final PostDataInit self;
     private final PostFacade postFacade;
 
-    public DataInit(
-            @Lazy DataInit self,
-            MemberFacade memberFacade,
+    public PostDataInit(
+            @Lazy PostDataInit self,
             PostFacade postFacade) {
         this.self = self;
-        this.memberFacade = memberFacade;
         this.postFacade = postFacade;
     }
 
     @Bean
-    public ApplicationRunner baseInitDataRunner() {
+    @Order(2)
+    public ApplicationRunner postDataInitApplicationRunner() {
         return args -> {
-            self.makeBaseMembers();
             self.makeBasePosts();
             self.makeBasePostComments();
         };
@@ -89,17 +85,5 @@ public class DataInit {
 
         RsData<Post> post6RsData = postFacade.write(user3Member, "제목6", "내용6");
         log.debug(post6RsData.msg());
-    }
-
-    @Transactional
-    public void makeBaseMembers() {
-        if (memberFacade.count() > 0) return;
-
-        Member systemMember = memberFacade.join("system", "1234", "시스템").data();
-        Member holdingMember = memberFacade.join("holding", "1234", "홀딩").data();
-        Member adminMember = memberFacade.join("admin", "1234", "관리자").data();
-        Member user1Member = memberFacade.join("user1", "1234", "유저1").data();
-        Member user2Member = memberFacade.join("user2", "1234", "유저2").data();
-        Member user3Member = memberFacade.join("user3", "1234", "유저3").data();
     }
 }
