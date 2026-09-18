@@ -1,8 +1,8 @@
 package com.back.service;
 
+import com.back.entity.Member;
 import com.back.exception.DomainException;
 import com.back.repository.MemberRepository;
-import com.back.entity.Member;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
