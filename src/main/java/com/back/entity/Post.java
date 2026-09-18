@@ -31,6 +31,7 @@ public class Post extends BaseIdAndTime {
     public PostComment addComment(Member author, String content) {
         PostComment postComment = PostComment.of(this, author, content);
         this.comments.add(postComment);
+        author.increaseActivityScore(1);
         return postComment;
     }
 
