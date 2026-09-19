@@ -1,6 +1,7 @@
 package com.back.boundedContext.member.in;
 
 import com.back.boundedContext.member.app.MemberFacade;
+import com.back.global.exception.DomainException;
 import com.back.shared.post.evnet.PostCommentCreatedEvent;
 import com.back.shared.post.evnet.PostCreatedEvent;
 import lombok.RequiredArgsConstructor;
@@ -19,19 +20,22 @@ public class MemberEventListener {
     @TransactionalEventListener(phase = AFTER_COMMIT)
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void handle(PostCreatedEvent event) {
-        var member = memberFacade
-                .findById(event.post().authorId())
-                .get();
-        member.increaseActivityScore(3);
+        memberFacade.findById(event.post().authorId())
+                .orElseThrow(() -> new DomainException(
+                        "404-1",
+                        "%d번 회원을 찾을 수 없습니다.".formatted(event.post().authorId())
+                ))
+                .increaseActivityScore(3);
     }
 
     @TransactionalEventListener(phase = AFTER_COMMIT)
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void handle(PostCommentCreatedEvent event) {
-        var member = memberFacade
-                .findById(event.postComment().authorId())
-                .get();
-
-        member.increaseActivityScore(1);
+        memberFacade.findById(event.postComment().authorId())
+                .orElseThrow(() -> new DomainException(
+                        "404-1",
+                        "%d번 회원을 찾을 수 없습니다.".formatted(event.postComment().authorId())
+                ))
+                .increaseActivityScore(1);
     }
 }
