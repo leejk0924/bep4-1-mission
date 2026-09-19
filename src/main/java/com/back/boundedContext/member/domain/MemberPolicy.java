@@ -1,11 +1,8 @@
 package com.back.boundedContext.member.domain;
 
-import org.springframework.stereotype.Service;
-
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-@Service
 public class MemberPolicy {
     private static final int PASSWORD_CHANGE_DAYS = 90;
 
