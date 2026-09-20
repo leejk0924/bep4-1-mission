@@ -9,38 +9,13 @@ import com.back.global.rsData.RsData;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
 
-import java.io.IOException;
-import java.io.UncheckedIOException;
-import java.net.ServerSocket;
-import java.util.UUID;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.DEFINED_PORT;
 
-@SpringBootTest(webEnvironment = DEFINED_PORT)
 @DisplayName("글/댓글 작성에 따른 활동점수 반영 통합 테스트")
-class ActivityScoreIntegrationTest {
-
-    @DynamicPropertySource
-    static void useFreePort(DynamicPropertyRegistry registry) {
-        int port = findFreePort();
-        registry.add("server.port", () -> port);
-        registry.add("member.api.base-url", () -> "http://localhost:%d/api/v1/member".formatted(port));
-    }
-
-    private static int findFreePort() {
-        try (ServerSocket socket = new ServerSocket(0)) {
-            return socket.getLocalPort();
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
-    }
+class ActivityScoreIntegrationTest extends AbstractIntegrationTest {
 
     @Autowired
     private MemberFacade memberFacade;
@@ -52,7 +27,7 @@ class ActivityScoreIntegrationTest {
     private PlatformTransactionManager transactionManager;
 
     private PostMember joinAndGetReplica(String usernamePrefix) {
-        String username = usernamePrefix + "-" + UUID.randomUUID().toString().substring(0, 8);
+        String username = uniqueUsername(usernamePrefix);
         Member member = memberFacade.join(username, "1234", usernamePrefix).data();
 
         return postFacade.findMemberByUsername(member.getUsername()).orElseThrow();

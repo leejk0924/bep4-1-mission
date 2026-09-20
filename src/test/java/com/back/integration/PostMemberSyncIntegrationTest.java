@@ -8,36 +8,11 @@ import com.back.boundedContext.post.out.PostMemberRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
-
-import java.io.IOException;
-import java.io.UncheckedIOException;
-import java.net.ServerSocket;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.DEFINED_PORT;
 
-@SpringBootTest(webEnvironment = DEFINED_PORT)
 @DisplayName("회원 가입/활동점수 변경에 따른 PostMember 복제본 동기화 통합 테스트")
-class PostMemberSyncIntegrationTest {
-
-    @DynamicPropertySource
-    static void useFreePort(DynamicPropertyRegistry registry) {
-        int port = findFreePort();
-        registry.add("server.port", () -> port);
-        registry.add("member.api.base-url", () -> "http://localhost:%d/api/v1/member".formatted(port));
-    }
-
-    private static int findFreePort() {
-        try (ServerSocket socket = new ServerSocket(0)) {
-            return socket.getLocalPort();
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
-    }
+class PostMemberSyncIntegrationTest extends AbstractIntegrationTest {
 
     @Autowired
     private MemberFacade memberFacade;
@@ -47,10 +22,6 @@ class PostMemberSyncIntegrationTest {
 
     @Autowired
     private PostMemberRepository postMemberRepository;
-
-    private String uniqueUsername(String prefix) {
-        return prefix + "-" + UUID.randomUUID().toString().substring(0, 8);
-    }
 
     @Test
     @DisplayName("회원 가입 시 같은 ID의 PostMember 복제본이 생성되고 필드가 일치하며 비밀번호는 복사되지 않는다")
