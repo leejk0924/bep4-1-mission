@@ -1,9 +1,11 @@
 package com.back.boundedContext.post.app;
 
 import com.back.boundedContext.post.domain.Post;
+import com.back.boundedContext.post.domain.PostComment;
 import com.back.boundedContext.post.domain.PostMember;
 import com.back.boundedContext.post.out.PostMemberRepository;
 import com.back.boundedContext.post.out.PostRepository;
+import com.back.global.exception.DomainException;
 import com.back.global.rsData.RsData;
 import com.back.shared.member.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +34,17 @@ public class PostFacade {
     @Transactional(readOnly = true)
     public Optional<Post> findById(int id) {
         return postRepository.findById(id);
+    }
+
+    @Transactional
+    public PostComment writeComment(int postId, PostMember author, String content) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new DomainException(
+                        "404-1",
+                        "%d번 글을 찾을 수 없습니다.".formatted(postId)
+                ));
+
+        return post.addComment(author, content);
     }
 
     @Transactional
