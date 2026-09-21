@@ -19,7 +19,7 @@ public class CashSupport {
         return cashMemberRepository.findByUsername(username);
     }
 
-    public Optional<Wallet> findWalletByUsername(CashMember holder) {
+    public Optional<Wallet> findWalletByHolder(CashMember holder) {
         return walletRepository.findByHolder(holder);
     }
 }

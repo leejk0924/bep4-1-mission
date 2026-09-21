@@ -3,6 +3,7 @@ package com.back.boundedContext.market.in;
 import com.back.boundedContext.market.app.MarketFacade;
 import com.back.boundedContext.market.domain.Cart;
 import com.back.boundedContext.market.domain.MarketMember;
+import com.back.boundedContext.market.domain.Order;
 import com.back.boundedContext.market.domain.Product;
 import com.back.shared.post.dto.PostDto;
 import com.back.shared.post.out.PostApiClient;
@@ -11,7 +12,6 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.core.annotation.Order;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -34,11 +34,12 @@ public class MarketDataInit {
     }
 
     @Bean
-    @Order(3)
+    @org.springframework.core.annotation.Order(3)
     public ApplicationRunner marketDataInitApplicationRunner() {
         return args -> {
             self.makeBaseProducts();
             self.makeBaseCartItems();
+            self.makeBaseOrders();
         };
     }
 
@@ -150,5 +151,35 @@ public class MarketDataInit {
 
         cart3.addItem(product1);
         cart3.addItem(product2);
+    }
+
+    @Transactional
+    public void makeBaseOrders() {
+        if (marketFacade.ordersCount() > 0) return;
+
+        MarketMember user1Member = marketFacade.findMemberByUsername("user1").get();
+        MarketMember user2Member = marketFacade.findMemberByUsername("user2").get();
+        MarketMember user3Member = marketFacade.findMemberByUsername("user3").get();
+
+        Cart cart1 = marketFacade.findCartByBuyer(user1Member).get();
+        Cart cart2 = marketFacade.findCartByBuyer(user2Member).get();
+        Cart cart3 = marketFacade.findCartByBuyer(user3Member).get();
+
+        Order order1 = marketFacade.createOrder(cart1).data();
+        Order order2 = marketFacade.createOrder(cart2).data();
+        Order order3 = marketFacade.createOrder(cart3).data();
+
+        // 주문 생성 때문에 cart1이 비어있기 때문에 다시 아이템 추가
+        Product product1 = marketFacade.findProductById(1).get();
+        Product product2 = marketFacade.findProductById(2).get();
+        Product product3 = marketFacade.findProductById(3).get();
+        Product product4 = marketFacade.findProductById(4).get();
+        Product product5 = marketFacade.findProductById(5).get();
+        Product product6 = marketFacade.findProductById(6).get();
+
+        cart1.addItem(product1);
+        cart1.addItem(product2);
+        cart1.addItem(product3);
+        cart1.addItem(product4);
     }
 }
