@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -40,5 +42,10 @@ public class PostFacade {
     @Transactional(readOnly = true)
     public Optional<PostMember> findMemberByUsername(String username) {
         return postSupport.findMemberByUsername(username);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Post> findByOrderByIdDesc() {
+        return postSupport.findByOrderByIdDesc();
     }
 }
