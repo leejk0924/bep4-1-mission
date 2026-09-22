@@ -1,7 +1,5 @@
 package com.back.shared.market.dto;
 
-import com.back.boundedContext.market.domain.Order;
-
 import java.time.LocalDateTime;
 
 public record OrderDto(
@@ -15,17 +13,4 @@ public record OrderDto(
         LocalDateTime requestPaymentDate,
         LocalDateTime paymentDate
 ) {
-    public OrderDto(Order order) {
-        this(
-                order.getId(),
-                order.getCreateDate(),
-                order.getModifyDate(),
-                order.getBuyer().getId(),
-                order.getBuyer().getNickname(),
-                order.getPrice(),
-                order.getSalePrice(),
-                order.getRequestPaymentDate(),
-                order.getPaymentDate()
-        );
-    }
 }

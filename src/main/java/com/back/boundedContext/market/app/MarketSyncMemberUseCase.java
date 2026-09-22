@@ -3,7 +3,6 @@ package com.back.boundedContext.market.app;
 import com.back.boundedContext.market.domain.MarketMember;
 import com.back.boundedContext.market.out.MarketMemberRepository;
 import com.back.global.eventPublisher.EventPublisher;
-import com.back.shared.market.dto.MarketMemberDto;
 import com.back.shared.market.event.MarketMemberCreatedEvent;
 import com.back.shared.member.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +28,11 @@ public class MarketSyncMemberUseCase {
         ));
 
         if (isNew) {
-            eventPublisher.publish(new MarketMemberCreatedEvent(new MarketMemberDto(_member)));
+            eventPublisher.publish(
+                    new MarketMemberCreatedEvent(
+                            _member.toDto()
+                    )
+            );
         }
         return _member;
     }
