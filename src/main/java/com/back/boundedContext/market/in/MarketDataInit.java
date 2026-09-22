@@ -63,7 +63,7 @@ public class MarketDataInit {
 
         Product product1 = marketFacade.createProduct(
                 user1MarketMember,
-                "Post",
+                post1.getModelTypeCode(),
                 post1.id(),
                 post1.title(),
                 post1.content(),
@@ -73,7 +73,7 @@ public class MarketDataInit {
 
         Product product2 = marketFacade.createProduct(
                 user1MarketMember,
-                "Post",
+                post2.getModelTypeCode(),
                 post2.id(),
                 post2.title(),
                 post2.content(),
@@ -83,7 +83,7 @@ public class MarketDataInit {
 
         Product product3 = marketFacade.createProduct(
                 user1MarketMember,
-                "Post",
+                post3.getModelTypeCode(),
                 post3.id(),
                 post3.title(),
                 post3.content(),
@@ -93,7 +93,7 @@ public class MarketDataInit {
 
         Product product4 = marketFacade.createProduct(
                 user2MarketMember,
-                "Post",
+                post4.getModelTypeCode(),
                 post4.id(),
                 post4.title(),
                 post4.content(),
@@ -103,7 +103,7 @@ public class MarketDataInit {
 
         Product product5 = marketFacade.createProduct(
                 user2MarketMember,
-                "Post",
+                post5.getModelTypeCode(),
                 post5.id(),
                 post5.title(),
                 post5.content(),
@@ -113,7 +113,7 @@ public class MarketDataInit {
 
         Product product6 = marketFacade.createProduct(
                 user3MarketMember,
-                "Post",
+                post6.getModelTypeCode(),
                 post6.id(),
                 post6.title(),
                 post6.content(),
