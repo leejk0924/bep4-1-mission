@@ -22,6 +22,7 @@ import static jakarta.persistence.CascadeType.REMOVE;
 public class Order extends BaseIdAndTime {
     @ManyToOne(fetch = FetchType.LAZY)
     private MarketMember buyer;
+    private LocalDateTime cancelDate;
     private LocalDateTime requestPaymentDate;
     private LocalDateTime paymentDate;
     private long price;
@@ -73,5 +74,13 @@ public class Order extends BaseIdAndTime {
 
     public void cancelRequestPayment() {
         requestPaymentDate = null;
+    }
+
+    public boolean isCanceled() {
+        return cancelDate != null;
+    }
+
+    public boolean isPaymentInProgress() {
+        return requestPaymentDate != null && paymentDate == null && cancelDate == null;
     }
 }

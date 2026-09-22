@@ -12,6 +12,7 @@ import java.util.List;
 
 import static jakarta.persistence.CascadeType.REFRESH;
 
+@Getter
 @Entity
 @Table(name = "CASH_WALLET")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -19,7 +20,6 @@ public class Wallet extends BaseManualIdAndTime {
     @ManyToOne(fetch = FetchType.LAZY)
     private CashMember holder;
 
-    @Getter
     private long balance;
 
     @OneToMany(mappedBy = "wallet", cascade = {CascadeType.PERSIST, REFRESH})
