@@ -1,4 +1,4 @@
-package com.back.shared.standard.resultType;
+package com.back.standard.resultType;
 
 public interface ResultType {
     String resultCode();

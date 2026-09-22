@@ -2,7 +2,7 @@ package com.back.boundedContext.payout.in;
 
 import com.back.boundedContext.payout.app.PayoutFacade;
 import com.back.boundedContext.payout.domain.PayoutPolicy;
-import com.back.shared.standard.ut.Util;
+import com.back.standard.ut.Util;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.job.Job;
 import org.springframework.batch.core.job.parameters.InvalidJobParametersException;

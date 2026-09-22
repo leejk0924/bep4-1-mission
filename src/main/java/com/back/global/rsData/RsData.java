@@ -1,6 +1,6 @@
 package com.back.global.rsData;
 
-import com.back.shared.standard.resultType.ResultType;
+import com.back.standard.resultType.ResultType;
 
 public record RsData<T> (
         String resultCode,

@@ -1,4 +1,4 @@
-package com.back.shared.standard.ut;
+package com.back.standard.ut;
 
 public class Util {
     public static class reflection {
